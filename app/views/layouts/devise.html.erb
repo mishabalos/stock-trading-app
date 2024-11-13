@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "StockMaster" %></title>
+    <title>Sign In | Jeremiah's Task App</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -14,10 +14,22 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://unpkg.com/lucide@latest"></script>
   </head>
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
-  </body>
-</html>
+    <main class="container mx-auto flex">
+      <div class="flex flex-col min-h-screen w-full">
+        <%= render "pages/auth_header" %>
+        <main class="flex-1 flex items-center justify-center">
+          <div class="w-full max-w-md rounded-lg border bg-white text-black shadow-sm">
+            <div class="p-6">
+              <div class="space-y-6">
+                <%= yield %>
+              </div>
+            </div>
+          </main>
+          <%= render "pages/footer" %>
+        </div>
+      </main>
+    </body>
+  </html>
