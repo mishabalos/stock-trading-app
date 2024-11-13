@@ -1,0 +1,11 @@
+<% if flash.any? %>
+  <div class="absolute top-10 right-10">
+    <% flash.each do |message_type, message| %>
+      <div class="bg-white border-l-4 <%= message_type == "notice" ? 'border-blue-500' : 'border-red-500' %> text-black p-4"
+      role="<%= message_type %>">
+        <p class="font-bold"><%= message_type.to_s.capitalize %></p>
+        <p><%= message %></p>
+      </div>
+    <% end %>
+  </div>
+<% end %>
