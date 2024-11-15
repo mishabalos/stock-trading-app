@@ -61,3 +61,5 @@ gem "rails_live_reload", "~> 0.3.6"
 gem "tailwindcss-rails", "~> 3.0"
 
 gem "devise"
+gem 'dotenv-rails', groups: [:development, :test]
+
