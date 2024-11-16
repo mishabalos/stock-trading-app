@@ -1,9 +1,12 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :lockable, :timeoutable, :trackable and :omniauthable
+  before_create :set_default_role
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   def approved?
     status
@@ -17,5 +20,15 @@ class User < ApplicationRecord
     else
       false
     end
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def set_default_role
+    self.role ||= "trader"
   end
 end

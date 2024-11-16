@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_15_125226) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_16_093003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "positions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "symbol"
+    t.integer "quantity"
+    t.decimal "average_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_positions_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,8 +39,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_15_125226) do
     t.string "unconfirmed_email"
     t.float "balance", default: 0.0, null: false
     t.boolean "status", default: false, null: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "positions", "users"
 end

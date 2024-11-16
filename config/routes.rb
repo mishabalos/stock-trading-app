@@ -4,8 +4,6 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-  root "pages#index"
-
   namespace :admin do
     get "dashboard", to: "dashboard#index"
     resources :users do
@@ -15,4 +13,15 @@ Rails.application.routes.draw do
     end
     root "dashboard#index"  # Makes admin/dashboard#index the root for /admin
   end
+
+  namespace :dashboard do
+    get "/", to: "pages#index", as: :root
+    resources :wallets, only: [ :new ] do
+      collection do
+        post :top_up
+      end
+    end
+  end
+
+  root "pages#index"
 end
