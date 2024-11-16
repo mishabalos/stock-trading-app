@@ -17,6 +17,8 @@
   </head>
   <body>
     <main class="container mx-auto mt-28 px-5 flex">
+      <%= notice if notice %>
+      <%= alert if alert %>
       <%= yield %>
     </main>
   </body>
