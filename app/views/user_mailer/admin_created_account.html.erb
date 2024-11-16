@@ -1,0 +1,8 @@
+<h1>Welcome to Trading App!</h1>
+<p>Hello,</p>
+<p>An administrator has created a trading account for you. Please confirm your email address by clicking the link below:</p>
+<p><%= link_to 'Confirm my account', confirmation_url(@user, confirmation_token: @user.confirmation_token) %></p>
+<p>After confirming your email, you can log in using:</p>
+<p>Email: <%= @user.email %></p>
+<p>Password: (the password set by the administrator)</p>
+<p>We recommend changing your password after your first login.</p>
