@@ -1,0 +1,28 @@
+<section class="py-16">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+    <div class="max-w-2xl mx-auto" data-controller="accordion">
+      <% faqs = [
+        { q: "How do I start trading?", 
+          a: "To start trading, simply sign up for an account, verify your identity, and deposit funds. Once your account is funded, you can begin placing trades on our platform." },
+        { q: "What are the fees for trading?",
+          a: "Our fee structure is competitive and transparent. We charge a small commission per trade, with no hidden fees. Please refer to our pricing page for detailed information." },
+        { q: "Is my money safe?",
+          a: "Yes, we take the security of your funds very seriously. We use bank-level encryption and security measures to protect your account and personal information. Additionally, we are regulated by relevant financial authorities." }
+      ] %>
+      <% faqs.each_with_index do |faq, index| %>
+        <div class="border-b">
+          <button class="w-full py-4 text-left font-semibold" 
+                  data-action="click->accordion#toggle"
+            data-accordion-target="trigger"
+            data-index="<%= index %>">
+            <%= faq[:q] %>
+          </button>
+          <div class="hidden pb-4" data-accordion-target="content" data-index="<%= index %>">
+            <%= faq[:a] %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

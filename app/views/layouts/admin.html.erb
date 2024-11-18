@@ -6,43 +6,29 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= yield :head %>
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= yield :head %>
   </head>
   <body class="bg-gray-50">
     <div class="min-h-screen">
       <nav class="bg-white shadow-sm border-b border-gray-200 w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
+            <!-- Left side -->
             <div class="flex">
               <div class="flex-shrink-0 flex items-center">
-                <%= link_to dashboard_root_path, class: "text-xl font-bold text-gray-900" do %>
-                  <a class="flex items-center justify-center" href="#">
-                    <svg class="h-8 w-8 text-blue-600" data-lucide="trending-up"></svg>
-                    <span class="ml-2 text-lg font-bold">StockMaster</span>
-                  </a>
+                <%= link_to admin_dashboard_root_path, class: "text-xl font-bold text-gray-900" do %>
+                  StockMaster
                 <% end %>
               </div>
             </div>
             <!-- Right side -->
             <div class="flex items-center space-x-4">
-              <!-- Wallet Balance -->
-              <div class="bg-gray-50 rounded-lg px-4 py-2">
-                <span class="text-sm text-gray-500">Balance</span>
-                <div class="font-semibold text-gray-900">
-                  <%= number_to_currency(current_user.balance) %>
-                </div>
-              </div>
-              <%= link_to new_dashboard_wallet_path, 
-                  class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" do %>
-                <i data-lucide="plus-circle" class="w-4 h-4 mr-2"></i>
-                Top Up
-              <% end %>
               <div class="relative ml-3">
                 <div class="flex items-center space-x-4">
                   <div class="text-sm">
