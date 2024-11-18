@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "stocks/intraday"
+  get "stocks/search", to: "stocks#intraday"
   devise_for :users
 
   get "up" => "rails/health#show", as: :rails_health_check
