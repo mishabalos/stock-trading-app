@@ -1,24 +1,38 @@
-<!-- app/views/dashboard/index.html.erb -->
-<div class="container mt-4">
-  <h1>Trading Dashboard</h1>
-  <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Account Balance</h5>
-          <p class="card-text h2"><%= number_to_currency(current_user.balance) %></p>
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="space-y-2 mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">Trading Dashboard</h1>
+    <p class="text-sm text-gray-500">Welcome back, <%= current_user.first_name %></p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white rounded-lg shadow">
+      <div class="p-6">
+        <div class="space-y-1">
+          <h2 class="text-sm font-medium text-gray-500">Account Balance</h2>
+          <p class="text-3xl font-bold text-gray-900">
+            <%= number_to_currency(current_user.balance) %>
+          </p>
         </div>
       </div>
     </div>
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Quick Actions</h5>
-          <div class="d-grid gap-2 d-md-flex">
-            <%= link_to "Search Stocks", stocks_search_path, class: "btn btn-primary" %>
-            <%= link_to "View Portfolio", "#", class: "btn btn-secondary" %>
-            <%= link_to "Transaction History", "#", class: "btn btn-info" %>
-          </div>
+    <div class="md:col-span-2 bg-white rounded-lg shadow">
+      <div class="p-6">
+        <h2 class="text-sm font-medium text-gray-500 mb-4">Quick Actions</h2>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <%= link_to stocks_search_path, 
+             class: "inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors" do %>
+            <i data-lucide="search" class="w-4 h-4 mr-2"></i>
+            Search Stocks
+          <% end %>
+          <%= link_to "#", 
+             class: "inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors" do %>
+            <i data-lucide="pie-chart" class="w-4 h-4 mr-2"></i>
+            View Portfolio
+          <% end %>
+          <%= link_to "#", 
+             class: "inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors" do %>
+            <i data-lucide="history" class="w-4 h-4 mr-2"></i>
+            Transaction History
+          <% end %>
         </div>
       </div>
     </div>

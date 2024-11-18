@@ -1,34 +1,75 @@
-<!-- app/views/admin/users/show.html.erb -->
-<div class="container mt-4">
-  <h1>Trader Details</h1>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title"><%= @user.full_name %></h5>
-      <dl class="row">
-        <dt class="col-sm-3">Email</dt>
-        <dd class="col-sm-9"><%= @user.email %></dd>
-        <dt class="col-sm-3">Status</dt>
-        <dd class="col-sm-9">
-          <span class="badge <%= @user.status? ? 'bg-success' : 'bg-warning' %>">
-            <%= @user.status? ? 'Approved' : 'Pending' %>
-          </span>
-        </dd>
-        <dt class="col-sm-3">Balance</dt>
-        <dd class="col-sm-9"><%= number_to_currency(@user.balance) %></dd>
-        <dt class="col-sm-3">Created</dt>
-        <dd class="col-sm-9"><%= @user.created_at.strftime("%B %d, %Y") %></dd>
-        <dt class="col-sm-3">Last Updated</dt>
-        <dd class="col-sm-9"><%= @user.updated_at.strftime("%B %d, %Y") %></dd>
-      </dl>
-      <div class="mt-4">
-        <%= link_to "Edit", edit_admin_user_path(@user), class: "btn btn-primary" %>
-        <%= link_to "Back to Users", admin_users_path, class: "btn btn-secondary" %>
-        <% unless @user.status? %>
-          <%= button_to "Approve User", approve_admin_user_path(@user), 
-              method: :patch, 
-              class: "btn btn-success" %>
+<div class="max-w-3xl mx-auto">
+  <%# Header %>
+  <div class="space-y-2 mb-6">
+    <div class="flex justify-between items-center">
+      <h2 class="text-2xl font-bold">Trader Details</h2>
+      <div class="flex items-center space-x-3">
+        <%= link_to edit_admin_user_path(@user), 
+           class: "inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
+          <i data-lucide="pencil" class="w-4 h-4 mr-1"></i> Edit
+        <% end %>
+        <%= link_to admin_users_path, 
+           class: "inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" do %>
+          <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Back to Users
         <% end %>
       </div>
     </div>
+  </div>
+  <%# Main Content Card %>
+  <div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="px-6 py-5 border-b border-gray-200">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-lg font-medium text-gray-900"><%= @user.full_name %></h3>
+          <p class="text-sm text-gray-500"><%= @user.email %></p>
+        </div>
+        <span class="<%= @user.status? ? 
+         'bg-green-100 text-green-800' : 
+         'bg-yellow-100 text-yellow-800' %> 
+         inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium">
+          <%= @user.status? ? 'Approved' : 'Pending' %>
+        </span>
+      </div>
+    </div>
+    <div class="px-6 py-5">
+      <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Balance</dt>
+          <dd class="mt-1 text-lg font-semibold text-gray-900">
+            <%= number_to_currency(@user.balance) %>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Account Created</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <div class="flex items-center">
+              <i data-lucide="calendar" class="w-4 h-4 mr-1 text-gray-400"></i>
+              <%= @user.created_at.strftime("%B %d, %Y") %>
+            </div>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500">Last Updated</dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <div class="flex items-center">
+              <i data-lucide="clock" class="w-4 h-4 mr-1 text-gray-400"></i>
+              <%= @user.updated_at.strftime("%B %d, %Y") %>
+            </div>
+          </dd>
+        </div>
+      </dl>
+    </div>
+    <% unless @user.status? %>
+      <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+        <div class="flex items-center justify-between">
+          <p class="text-sm text-gray-500">This trader is pending approval</p>
+          <%= button_to approve_admin_user_path(@user), 
+             method: :patch,
+             class: "inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" do %>
+            <i data-lucide="check" class="w-4 h-4 mr-1"></i> Approve Trader
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -63,3 +63,5 @@ gem "tailwindcss-rails", "~> 3.0"
 gem "devise"
 gem "dotenv-rails", groups: [ :development, :test ]
 gem "htmlbeautifier"
+gem 'lucide-rails'
+
