@@ -90,33 +90,5 @@
         </div>
       </main>
     </div>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <nav class="bg-white border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between h-16">
-            <!-- Other nav items... -->
-            <div class="flex items-center space-x-4">
-              <!-- Wallet Balance Display -->
-              <%= turbo_frame_tag "wallet_balance" do %>
-                <div class="bg-gray-50 rounded-lg px-4 py-2">
-                  <span class="text-sm text-gray-500">Balance</span>
-                  <div class="font-semibold text-gray-900">
-                    <%= number_to_currency(current_user.balance) %>
-                  </div>
-                </div>
-              <% end %>
-              <!-- Top Up Button -->
-              <%= link_to new_dashboard_wallet_path, 
-            class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-                Top Up
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </main>
   </body>
 </html>

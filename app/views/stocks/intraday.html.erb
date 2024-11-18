@@ -1,10 +1,10 @@
 <div>
   <%# I need to create a form where I submit a symbol and then I get the intraday data for that symbol %>
-  <%= form_with url: stocks_intraday_path, method: :get do |form| %>
+  <%= form_with url: stocks_search_path, method: :get do |form| %>
     <%= form.text_field :symbol, placeholder: "Enter a symbol", required: true %>
     <%= form.submit "Search", name: nil %>
   <% end %>
-  <% if @intraday_data.present? %>
+  <% if @intraday_data["Meta Data"].present? %>
     <p><%= @intraday_data["Meta Data"]["2. Symbol"] %></p>
     <p><%= @latest_date %></p>
     <p><%= @latest_value %></p>
