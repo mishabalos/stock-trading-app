@@ -21,6 +21,13 @@ Rails.application.routes.draw do
         post :top_up
       end
     end
+    get "portfolio", to: "trading#index"
+    resources :trading, only: [ :index, :new ] do
+      collection do
+        post "buy/:symbol", to: "trading#buy", as: :buy
+        post "sell/:symbol", to: "trading#sell", as: :sell
+      end
+    end
   end
 
   root "pages#index"
