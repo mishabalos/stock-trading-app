@@ -28,6 +28,7 @@ Rails.application.routes.draw do
         post "sell/:symbol", to: "trading#sell", as: :sell
       end
     end
+    resources :transactions, only: [ :index ]
   end
 
   root "pages#index"
