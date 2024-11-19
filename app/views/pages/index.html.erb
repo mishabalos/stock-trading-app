@@ -1,4 +1,24 @@
-<div>
-  <h1 class="font-bold text-4xl">Pages#index</h1>
-  <p>Find me in app/views/pages/index.html.erb</p>
+<div class="flex flex-col min-h-screen">
+  <main class="flex-grow">
+    <section class="py-20 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-center">
+      <h1 class="text-4xl font-bold mb-4">Trade Smarter, Not Harder</h1>
+      <p class="text-xl mb-8">Join thousands of traders making informed decisions with StockTrader</p>
+      <%= button_to "Get Started", "#", class: "btn-secondary text-lg" %>
+    </section>
+    <%= render "featured_stocks", stocks: @stocks %>
+    <%= render "faq_section" %>
+    <section class="py-20 bg-blue-600 text-white text-center">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-4">Start Earning Today</h2>
+        <p class="text-xl mb-8">Join our community of successful traders and take control of your financial future.</p>
+        <%= form_tag '#', class: "flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 max-w-md mx-auto" do %>
+          <%= email_field_tag :email, nil, 
+          class: "w-full px-4 py-2 rounded bg-white text-black",
+          placeholder: "Enter your email" %>
+          <%= submit_tag "Sign Up Now", 
+          class: "btn-secondary text-lg" %>
+        <% end %>
+      </div>
+    </section>
+  </main>
 </div>

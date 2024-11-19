@@ -19,11 +19,13 @@
       <nav class="bg-white shadow-sm border-b border-gray-200 w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
-            <!-- Left side -->
             <div class="flex">
               <div class="flex-shrink-0 flex items-center">
                 <%= link_to dashboard_root_path, class: "text-xl font-bold text-gray-900" do %>
-                  StockMaster
+                  <a class="flex items-center justify-center" href="#">
+                    <svg class="h-8 w-8 text-blue-600" data-lucide="trending-up"></svg>
+                    <span class="ml-2 text-lg font-bold">StockMaster</span>
+                  </a>
                 <% end %>
               </div>
             </div>
@@ -36,12 +38,10 @@
                   <%= number_to_currency(current_user.balance) %>
                 </div>
               </div>
-              <!-- Top Up Button -->
               <%= link_to new_dashboard_wallet_path, 
                   class: "text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" do %>
                 Top Up
               <% end %>
-              <!-- User Menu -->
               <div class="relative ml-3">
                 <div class="flex items-center space-x-4">
                   <nav class="ml-auto flex gap-4 sm:gap-6">
