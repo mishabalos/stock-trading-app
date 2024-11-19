@@ -1,26 +1,80 @@
-<!-- app/views/dashboard/index.html.erb -->
-<div class="container mt-4">
-  <h1>Trading Dashboard</h1>
-  <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Account Balance</h5>
-          <p class="card-text h2"><%= number_to_currency(current_user.balance) %></p>
+<div class="max-w-7xl mx-auto p-6">
+  <%# Header %>
+  <div class="mb-8">
+    <h1 class="text-2xl md:text-3xl font-bold text-gray-900">
+      Welcome, <%= current_user.first_name%>!
+    </h1>
+    <p class="mt-2 text-sm text-gray-600">
+      Here's an overview of your trading account
+    </p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <%# Balance Card %>
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div class="p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-sm font-medium text-gray-500">Account Balance</h2>
+          <div class="rounded-full bg-green-100 p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd" />
+            </svg>
+          </div>
         </div>
+        <p class="text-3xl font-bold text-gray-900"><%= number_to_currency(current_user.balance) %></p>
+        <p class="mt-2 text-sm text-gray-500">Available for trading</p>
       </div>
     </div>
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Quick Actions</h5>
-          <div class="d-grid gap-2 d-md-flex">
-            <%= link_to "Search Stocks", stocks_search_path, class: "btn btn-primary" %>
-            <%= link_to "View Portfolio", "#", class: "btn btn-secondary" %>
-            <%= link_to "Transaction History", "#", class: "btn btn-info" %>
+    <%# Quick Actions %>
+    <div class="md:col-span-2">
+      <div class="bg-white rounded-lg shadow-lg">
+        <div class="p-6">
+          <h2 class="text-lg font-medium text-gray-900 mb-4">Quick Actions</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <%= link_to stocks_search_path, 
+                class: "inline-flex items-center justify-center px-4 py-3 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-150" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+              </svg>
+              Search Stocks
+            <% end %>
+            <%= link_to dashboard_portfolio_path,
+                class: "inline-flex items-center justify-center px-4 py-3 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-150" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+              </svg>
+              View Portfolio
+            <% end %>
+            <%= link_to dashboard_transactions_path,
+                class: "inline-flex items-center justify-center px-4 py-3 border border-transparent text-sm font-medium rounded-lg text-white bg-purple-600 hover:bg-purple-700 transition-colors duration-150" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" />
+              </svg>
+              Transaction History
+            <% end %>
           </div>
         </div>
       </div>
     </div>
+    <%# Portfolio Summary %>
+    <div class="bg-white rounded-lg shadow-lg p-6">
+      <h2 class="text-lg font-medium mb-4">Portfolio Summary</h2>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div>
+          <p class="text-gray-500">Total Market Value</p>
+          <p class="font-medium text-lg">
+            <% total_value = @positions&.sum { |p| p.market_value || 0 } %>
+            <%= total_value ? number_to_currency(total_value) : "N/A" %>
+          </p>
+        </div>
+        <div>
+          <p class="text-gray-500">Number of Positions</p>
+          <p class="font-medium text-lg"><%= @positions.count %></p>
+        </div>
+        <div>
+          <p class="text-gray-500">Available Cash</p>
+          <p class="font-medium text-lg"><%= number_to_currency(current_user.balance) %></p>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
