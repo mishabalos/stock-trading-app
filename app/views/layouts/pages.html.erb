@@ -16,15 +16,16 @@
     <%= javascript_importmap_tags %>
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
-  <body>
-    <main class="container mx-auto flex">
-      <div class="flex flex-col min-h-screen">
-        <%= render "pages/header" %>
-        <%= notice if notice %>
-        <%= alert if alert %>
-        <%= yield %>
-        <%= render "pages/footer" %>
-      </div>
-    </main>
+  <body class="bg-gray-50">
+    <%= render "shared/flash" %>
+    <div class="min-h-screen">
+      <main>
+        <div>
+          <%= render "pages/header" %>
+          <%= yield %>
+          <%= render "pages/footer" %>
+        </div>
+      </main>
+    </div>
   </body>
 </html>

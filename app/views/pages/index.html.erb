@@ -3,7 +3,7 @@
     <section class="py-20 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-center">
       <h1 class="text-4xl font-bold mb-4">Trade Smarter, Not Harder</h1>
       <p class="text-xl mb-8">Join thousands of traders making informed decisions with StockTrader</p>
-      <%= button_to "Get Started", "#", class: "btn-secondary text-lg" %>
+      <%= link_to "Get Started", new_user_registration_path, class: "btn-secondary text-lg" %>
     </section>
     <%= render "featured_stocks", stocks: @stocks %>
     <%= render "faq_section" %>
