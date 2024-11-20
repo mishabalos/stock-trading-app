@@ -61,17 +61,62 @@ class Dashboard::TradingController < Dashboard::BaseController
         redirect_to new_dashboard_trade_path(symbol: params[:symbol])
       end
     end
-  rescue => e
-    Rails.logger.error "Trade error: #{e.message}"
-    flash[:alert] = "An error occurred while processing your trade"
-    redirect_to new_dashboard_trade_path(symbol: params[:symbol])
+  end
+
+  def sell
+    @position = current_user.positions.find_by!(symbol: params[:symbol])
+    fetch_stock_data
+    @max_quantity = @position.quantity
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "Position not found"
+    redirect_to dashboard_portfolio_path
+  end
+
+  def process_sell
+    @position = current_user.positions.find_by!(symbol: params[:symbol])
+    quantity = params[:quantity].to_i
+    fetch_stock_data
+
+    if quantity <= 0 || quantity > @position.quantity
+      flash[:alert] = "Please enter a valid quantity"
+      return redirect_to sell_dashboard_trading_path(symbol: params[:symbol])
+    end
+
+    total_sale = @current_price * quantity
+
+    ActiveRecord::Base.transaction do
+      # Update position
+      if quantity == @position.quantity
+        @position.destroy!
+      else
+        @position.update!(quantity: @position.quantity - quantity)
+      end
+
+      # Create transaction record
+      current_user.transactions.create!(
+        symbol: params[:symbol],
+        transaction_type: "sell",
+        quantity: quantity,
+        price: @current_price,
+        total_amount: total_sale
+      )
+
+      # Update user's balance
+      current_user.update_column(:balance, current_user.balance + total_sale)
+
+      flash[:notice] = "Successfully sold #{quantity} shares of #{params[:symbol]}"
+      redirect_to dashboard_portfolio_path
+    end
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "Position not found"
+    redirect_to dashboard_portfolio_path
   end
 
   private
 
   def fetch_stock_data
-    api = AlphaVantageApi.new
-    @stock_data = api.time_series_intraday(params[:symbol])
+    api = CachedStockService.new
+    @stock_data = api.fetch_intraday_data(params[:symbol])
 
     if @stock_data["Meta Data"].present?
       @latest_date = @stock_data["Meta Data"]["3. Last Refreshed"]
@@ -81,9 +126,5 @@ class Dashboard::TradingController < Dashboard::BaseController
       flash[:alert] = "Symbol not found"
       redirect_to stocks_search_path
     end
-  rescue => e
-    Rails.logger.error "API Error: #{e.message}"
-    flash[:alert] = "Unable to fetch stock data"
-    redirect_to stocks_search_path
   end
 end
