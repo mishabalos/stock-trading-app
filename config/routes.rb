@@ -8,10 +8,10 @@ Rails.application.routes.draw do
     get "dashboard", to: "dashboard#index"
     resources :users do
       member do
-        patch :approve  # Custom route for approving users
+        patch :approve
       end
     end
-    root "dashboard#index"  # Makes admin/dashboard#index the root for /admin
+    root "dashboard#index"
   end
 
   namespace :dashboard do
@@ -25,7 +25,8 @@ Rails.application.routes.draw do
     resources :trading, only: [ :index, :new ] do
       collection do
         post "buy/:symbol", to: "trading#buy", as: :buy
-        post "sell/:symbol", to: "trading#sell", as: :sell
+        get "sell/:symbol", to: "trading#sell", as: :sell
+        post "sell/:symbol", to: "trading#process_sell", as: :process_sell
       end
     end
     resources :transactions, only: [ :index ]

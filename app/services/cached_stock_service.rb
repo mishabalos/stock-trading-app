@@ -10,7 +10,7 @@ class CachedStockService
     cache_key = "stock_data/#{symbol}"
     cached_data = Rails.cache.read(cache_key)
     Rails.logger.debug "Cache hit: #{!cached_data.nil?}"
-    Rails.logger.debug "Cache near expiry: #{cache_near_expiry?(cache_key)}" if cached_data
+    # Rails.logger.debug "Cache near expiry: #{cache_near_expiry?(cache_key)}" if cached_data
     return cached_data if cached_data && !cache_near_expiry?(cache_key)
 
     if cached_data && cache_near_expiry?(cache_key)
@@ -18,7 +18,7 @@ class CachedStockService
       return cached_data
     end
 
-    Rails.logger.debug "Fetching fresh data from API"
+    # Rails.logger.debug "Fetching fresh data from API"
     fetch_and_cache_data(symbol, cache_key)
   end
 
@@ -30,11 +30,11 @@ class CachedStockService
 
     # Check if cache was created more than REFRESH_THRESHOLD ago
     cache_created_at = Rails.cache.read("#{cache_key}_created_at")
-    Rails.logger.debug "Cache created at: #{cache_created_at}"
+    # Rails.logger.debug "Cache created at: #{cache_created_at}"
     return false unless cache_created_at
 
     is_expiring = Time.now > (cache_created_at + REFRESH_THRESHOLD)
-    Rails.logger.debug "Is cache expiring? #{is_expiring}"
+    # Rails.logger.debug "Is cache expiring? #{is_expiring}"
     is_expiring
   end
 
