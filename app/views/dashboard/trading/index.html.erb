@@ -66,6 +66,12 @@
           <p class="text-gray-500">Available Cash</p>
           <p class="font-medium text-lg"><%= number_to_currency(current_user.balance) %></p>
         </div>
+        <div>
+          <p class="text-gray-500">Total Profit/Loss</p>
+          <p class="font-medium text-lg <%= @positions.sum { |p| p.profit_loss || 0 } >= 0 ? 'text-green-600' : 'text-red-600' %>">
+            <%= number_to_currency(@positions.sum { |p| p.profit_loss || 0 }) %>
+          </p>
+        </div>
       </div>
     </div>
   <% else %>

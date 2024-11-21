@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         patch :approve
       end
     end
+    get "transactions", to: "dashboard#transactions"
     root "dashboard#index"
   end
 
