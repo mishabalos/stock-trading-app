@@ -22,7 +22,7 @@ class Dashboard::TradingController < Dashboard::BaseController
 
     # Redirect based on success/failure
     flash[result[:success] ? :notice : :alert] = result[:message]
-    redirect_to result[:success] ? dashboard_portfolio_path : new_dashboard_trade_path(symbol: params[:symbol])
+    redirect_to result[:success] ? dashboard_portfolio_path : new_dashboard_trading_path(symbol: params[:symbol])
   end
 
   # Form for sell order
