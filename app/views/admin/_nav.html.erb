@@ -1,0 +1,37 @@
+<nav class="bg-white shadow-sm border-b border-gray-200 w-full top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <!-- Left side -->
+      <div class="flex">
+        <div class="flex-shrink-0 flex items-center">
+          <%= link_to admin_dashboard_path, class: "text-xl font-bold text-gray-900 flex items-center justify-center" do %>
+            <svg class="h-8 w-8 text-blue-600" data-lucide="trending-up"></svg>
+            <span class="ml-2 text-lg font-bold">StockMaster</span>
+          <% end %>
+        </div>
+      </div>
+      <!-- Right side -->
+      <div class="flex items-center space-x-4">
+        <%= link_to admin_users_path, class: "text-sm text-gray-500 hover:text-gray-700" do %>
+          Users
+        <% end %>
+        <%= link_to admin_transactions_path, class: "text-sm text-gray-500 hover:text-gray-700" do %>
+          Transactions
+        <% end %>
+        <div class="h-4 w-px bg-black"></div>
+        <div class="relative ml-3">
+          <div class="flex items-center space-x-4">
+            <div class="text-sm">
+              <span class="text-gray-700"><%= current_user.full_name %></span>
+            </div>
+            <%= button_to destroy_user_session_path, 
+                      method: :delete,
+                      class: "text-sm text-gray-500 hover:text-gray-700" do %>
+              <i data-lucide="log-out" class="w-5 h-5"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
