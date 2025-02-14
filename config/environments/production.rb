@@ -95,6 +95,8 @@ Rails.application.configure do
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
 
+  config.action_mailer.default_url_options = { host: "stock-trading-app-6g13.onrender.com", protocol: "https" }
+
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
   #   "example.com",     # Allow requests from example.com
