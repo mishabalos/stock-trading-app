@@ -10,7 +10,7 @@ class Position < ApplicationRecord
     response = service.fetch_intraday_data(symbol)
     return 0.0 unless response["Time Series (Daily)"]
     latest_date = response["Time Series (Daily)"].keys.first
-    latest_price = response["Time Series (Daily)"][latest_date]["4. close"]
+    latest_price = response["Time Series (Daily)"][latest_date]["2. high"]
     latest_price.to_f
   end
 
