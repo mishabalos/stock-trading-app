@@ -65,5 +65,6 @@ gem "dotenv-rails", groups: [ :development, :test ]
 gem "htmlbeautifier"
 gem "lucide-rails"
 gem "sidekiq"
-gem 'will_paginate', '~> 4.0', '>= 4.0.1'
-gem "rspec-rails", "~> 7.1", :groups => [:development, :test]
+gem "will_paginate", "~> 4.0", ">= 4.0.1"
+gem "rspec-rails", "~> 7.1", groups: [ :development, :test ]
+gem "ostruct"
